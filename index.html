@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajiv & Pradeepa Wedding Invitation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #FFE5F1 0%, #FFD7E5 50%, #FFE8F5 100%);
+            min-height: 100vh;
+            cursor: none;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Custom Cursor */
+        #customCursor {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #FADADD 0%, #FFC1CC 100%);
+            box-shadow: 
+                0 0 10px rgba(250, 218, 221, 0.8),
+                0 0 20px rgba(250, 218, 221, 0.5),
+                inset 0 0 10px rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #customCursor::before {
+            content: '\f004';
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 10px;
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+        }
+
+        #trailCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .ornament {
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, #FF69B4, #FFB6C1, #FF69B4);
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #FF1493, #FF69B4, #FFB6C1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 8px rgba(255, 105, 180, 0.2);
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #8B4C7A;
+            font-style: italic;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .title-main {
+            font-size: 2rem;
+            color: #9B2D5F;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .names {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #D81B5F, #E91E63, #FF69B4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+            font-weight: bold;
+            letter-spacing: 2px;
+            line-height: 1.3;
+        }
+
+        .quote {
+            font-size: 1.1rem;
+            color: #8B4C7A;
+            font-style: italic;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            line-height: 1.8;
+        }
+
+        .section {
+            margin: 40px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #9B2D5F;
+            font-weight: bold;
+            margin: 30px 0;
+            padding: 15px;
+            background: rgba(255, 182, 193, 0.2);
+            border-radius: 15px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.4), rgba(255, 182, 193, 0.2));
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 182, 193, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.4);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            color: #9B2D5F;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .card-content {
+            font-size: 1.1rem;
+            color: #8B4C7A;
+            line-height: 1.8;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Vertical line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, 
+                rgba(255, 105, 180, 0.3) 0%, 
+                rgba(255, 182, 193, 0.8) 50%, 
+                rgba(255, 105, 180, 0.3) 100%);
+            transform: translateX(-50%);
+            animation: timelinePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes timelinePulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 48%;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.4), rgba(255, 182, 193, 0.2));
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 182, 193, 0.5);
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.1);
+        }
+
+        .timeline-item:nth-child(1) {
+            margin-left: 0;
+            animation: slideInLeft 0.6s ease-out;
+            animation-delay: 0.1s;
+            animation-fill-mode: both;
+        }
+
+        .timeline-item:nth-child(2) {
+            margin-left: auto;
+            margin-right: 0;
+            animation: slideInRight 0.6s ease-out;
+            animation-delay: 0.3s;
+            animation-fill-mode: both;
+        }
+
+        .timeline-item:nth-child(3) {
+            margin-left: 0;
+            animation: slideInLeft 0.6s ease-out;
+            animation-delay: 0.5s;
+            animation-fill-mode: both;
+        }
+
+        .timeline-item:nth-child(4) {
+            margin-left: auto;
+            margin-right: 0;
+            animation: slideInRight 0.6s ease-out;
+            animation-delay: 0.7s;
+            animation-fill-mode: both;
+        }
+
+        .timeline-item:nth-child(5) {
+            margin-left: 0;
+            animation: slideInLeft 0.6s ease-out;
+            animation-delay: 0.9s;
+            animation-fill-mode: both;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            border-radius: 50%;
+            border: 4px solid #FFE5F1;
+            transform: translateY(-50%);
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+            animation: markerPulse 2s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        @keyframes markerPulse {
+            0%, 100% { 
+                transform: translateY(-50%) scale(1);
+                box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+            }
+            50% { 
+                transform: translateY(-50%) scale(1.2);
+                box-shadow: 0 0 30px rgba(255, 105, 180, 0.8);
+            }
+        }
+
+
+        .timeline-item:nth-child(odd)::before {
+            right: -36px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -36px;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.6), rgba(255, 182, 193, 0.4));
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .timeline-item:hover::after {
+            opacity: 1;
+        }
+
+        .timeline-date {
+            font-size: 1.1rem;
+            color: #D81B5F;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .timeline-content {
+            font-size: 1rem;
+            color: #8B4C7A;
+            line-height: 1.8;
+            animation: fadeInContent 0.8s ease-out;
+        }
+
+        @keyframes fadeInContent {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Timeline Icon Decoration */
+        .timeline-decoration {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 182, 193, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 10;
+        }
+
+        .date-card {
+            margin: 25px 0;
+        }
+
+        .date-title {
+            font-size: 1.5rem;
+            color: #9B2D5F;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .date {
+            font-size: 1.4rem;
+            color: #D81B5F;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .time {
+            font-size: 1.2rem;
+            color: #8B4C7A;
+            margin: 5px 0;
+        }
+
+        .venue-text {
+            font-size: 1.3rem;
+            color: #8B4C7A;
+            line-height: 1.8;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding: 30px;
+            background: rgba(255, 182, 193, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 182, 193, 0.3);
+        }
+
+        .footer-text {
+            font-size: 1rem;
+            color: #9B2D5F;
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+
+        .hashtags {
+            font-size: 1.1rem;
+            color: #D81B5F;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 182, 193, 0.3);
+            border: 2px solid rgba(255, 182, 193, 0.5);
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #9B2D5F;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 10000;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 182, 193, 0.5);
+            transform: scale(1.05);
+        }
+
+        body.night-mode {
+            background: linear-gradient(135deg, #2D1B4E 0%, #4B2C5F 50%, #6B3A7F 100%);
+        }
+
+        body.night-mode #customCursor {
+            background: radial-gradient(circle, #E6CEE3 0%, #D4AED6 100%);
+            box-shadow: 
+                0 0 10px rgba(230, 206, 227, 0.8),
+                0 0 20px rgba(230, 206, 227, 0.5),
+                inset 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        a, button {
+            cursor: none;
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            body {
+                cursor: auto; /* Show default cursor on mobile */
+            }
+
+            #customCursor {
+                display: none;
+            }
+
+            #trailCanvas {
+                display: none;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+
+            .names {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+            }
+
+            .title-main {
+                font-size: 1.4rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+                margin: 15px 0;
+            }
+
+            .quote {
+                font-size: 0.95rem;
+                padding: 15px;
+                margin: 20px 0;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+                padding: 12px;
+                margin: 25px 0;
+            }
+
+            .card {
+                padding: 20px;
+                margin: 15px 0;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+
+            .card-content {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+
+            .timeline {
+                padding: 30px 15px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100% !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                margin-bottom: 30px;
+                padding: 20px;
+            }
+
+            .timeline-item::before {
+                left: -36px !important;
+                right: auto !important;
+                width: 16px;
+                height: 16px;
+            }
+
+            .timeline-date {
+                font-size: 0.95rem;
+            }
+
+            .timeline-content {
+                font-size: 0.9rem;
+            }
+
+            .date-title {
+                font-size: 1.2rem;
+            }
+
+            .date {
+                font-size: 1.1rem;
+            }
+
+            .time {
+                font-size: 1rem;
+            }
+
+            .venue-text {
+                font-size: 1.1rem;
+            }
+
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+
+            .footer {
+                padding: 20px;
+                margin-top: 40px;
+            }
+
+            .footer-text {
+                font-size: 0.9rem;
+            }
+
+            .hashtags {
+                font-size: 0.95rem;
+            }
+
+            .ornament {
+                width: 100px;
+                margin: 15px auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.3rem;
+            }
+
+            .names {
+                font-size: 1.4rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .date-title {
+                font-size: 1.1rem;
+            }
+
+            .date {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i> Night Mode</button>
+
+    <!-- Custom Cursor -->
+    <div id="customCursor"></div>
+
+    <!-- Trail Canvas -->
+    <canvas id="trailCanvas"></canvas>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="ornament"></div>
+            <h1><i class="fas fa-ring"></i> The Wedding Celebration of</h1>
+            <div class="names">S. Rajiv & M. Pradeepa</div>
+            <div class="ornament"></div>
+            <div class="subtitle">
+                Tamil Nadu <i class="fas fa-heart"></i> Madurai — Two States, One Story
+            </div>
+        </div>
+
+        <!-- Invitation Message -->
+        <div class="section">
+            <p class="subtitle">
+                We joyfully invite you to celebrate the union of
+            </p>
+            <div class="card">
+                <div class="card-content">
+                    <strong style="color: #D81B5F;">S. Rajiv, B.E. Mechanical Engineer</strong><br>
+                    Team Lead – APA Engineering Pvt. Ltd.
+                </div>
+            </div>
+            <p style="font-size: 2rem; color: #D81B5F; margin: 15px 0;">&</p>
+            <div class="card">
+                <div class="card-content">
+                    <strong style="color: #D81B5F;">M. Pradeepa, B.Com (CA), DGT</strong><br>
+                    Data Entry Operator (Executive), Meenakshi Super Specialty Hospital, Madurai
+                </div>
+            </div>
+        </div>
+
+        <!-- Quote -->
+        <div class="quote">
+            <i class="fas fa-heart"></i> Two hearts, one soul — bound by faith, love, and destiny.
+        </div>
+
+        <!-- Meet the Couple -->
+        <div class="section">
+            <div class="section-title"><i class="fas fa-heart"></i> Meet the Couple</div>
+            
+            <div class="card">
+                <div class="card-title">Groom:</div>
+                <div class="card-content">
+                    <strong style="color: #D81B5F;">S. Rajiv</strong><br>
+                    B.E. Mechanical Engineer<br>
+                    Team Lead – APA Engineering Pvt. Ltd.<br>
+                    Son of R. Selvam and S. Devi
+                </div>
+            </div>
+
+            <p style="font-size: 2rem; margin: 20px 0;"><i class="fas fa-heart" style="color: #D81B5F;"></i></p>
+
+            <div class="card">
+                <div class="card-title">Bride:</div>
+                <div class="card-content">
+                    <strong style="color: #D81B5F;">M. Pradeepa</strong><br>
+                    Data Entry Operator (Executive)<br>
+                    Meenakshi Super Specialty Hospital, Madurai<br>
+                    Daughter of K. Muthuraj and M. Sumathi
+                </div>
+            </div>
+        </div>
+
+        <!-- Quote -->
+        <div class="quote">
+            "Two hearts, one soul, bound by love forever —<br>
+            a beautiful union of two families, two states, and endless love."
+        </div>
+
+        <!-- Our Story -->
+        <div class="section">
+            <div class="section-title"><i class="fas fa-star"></i> Our Story</div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <i class="fas fa-heart" style="font-size: 1.5rem; margin-right: 8px; color: #D81B5F;"></i>
+                        <strong>June 13, 2025</strong> — Our Hearts First Met
+                    </div>
+                    <div class="timeline-content">
+                        Ours was an arranged match, but destiny had already written something far more magical.
+                        The moment I saw her photo, time seemed to pause — her smile spoke a thousand unspoken words, and my heart knew she was the one.
+                        The next day, I traveled to meet her. Every song that played along the way felt like the universe was setting the rhythm for our love story.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <i class="fas fa-car" style="font-size: 1.5rem; margin-right: 8px; color: #D81B5F;"></i>
+                        <strong>August 10, 2025</strong> — Our First Drive
+                    </div>
+                    <div class="timeline-content">
+                        Just a five-minute drive — a small escape from a family function — but in those few minutes, the world faded away. Her laughter danced in the air, her eyes held a sparkle I'll never forget. That short drive wasn't just a ride… it was the beginning of forever in motion.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <i class="fas fa-ring" style="font-size: 1.5rem; margin-right: 8px; color: #D81B5F;"></i>
+                        <strong>August 29, 2025</strong> — Our Engagement
+                    </div>
+                    <div class="timeline-content">
+                        That day, amidst smiles, blessings, and joyful tears, we exchanged more than rings — we exchanged promises. Promises to stand together, cherish every sunrise, and turn every dream into our shared reality.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <i class="fas fa-birthday-cake" style="font-size: 1.5rem; margin-right: 8px; color: #D81B5F;"></i>
+                        <strong>October 15, 2025</strong> — Our First Date
+                    </div>
+                    <div class="timeline-content">
+                        Her birthday — a day already special — became unforgettable. Every glance, every moment that evening, felt like a scene from a fairytale written just for us.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <i class="fas fa-flower" style="font-size: 1.5rem; margin-right: 8px; color: #D81B5F;"></i>
+                        <strong>October 26, 2025</strong> — Our Special Meetup
+                    </div>
+                    <div class="timeline-content">
+                        As we embraced the final days before stepping into forever, we made memories that will never fade. Watching her light up every space she entered, I couldn't help but fall for her all over again.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Moments -->
+        <div class="section">
+            <div class="section-title"><i class="fas fa-heart"></i> Upcoming Moments of Forever</div>
+
+            <div class="card date-card">
+                <div class="date-title"><i class="fas fa-wine-glass"></i> Reception</div>
+                <div class="date"><i class="fas fa-calendar-alt"></i> Saturday, November 22, 2025</div>
+                <div class="time"><i class="fas fa-clock"></i> 06:30 PM onwards</div>
+                <div class="venue-text"><i class="fas fa-map-marker-alt"></i> Sri Vignesh Mahal A/C, 7th Cross Street, Nallathambi Main Rd, Pammal, Chennai</div>
+            </div>
+
+            <div class="card date-card">
+                <div class="date-title"><i class="fas fa-heart"></i> Wedding Ceremony</div>
+                <div class="date"><i class="fas fa-calendar-alt"></i> Sunday, November 23, 2025</div>
+                <div class="time"><i class="fas fa-clock"></i> 06:00 AM onwards</div>
+                <div class="venue-text"><i class="fas fa-map-marker-alt"></i> Sri Vignesh Mahal A/C, 7th Cross Street, Nallathambi Main Rd, Pammal, Chennai</div>
+            </div>
+
+            <div class="card date-card">
+                <div class="date-title"><i class="fas fa-leaf"></i> Nagavalli Mukurtham</div>
+                <div class="date"><i class="fas fa-calendar-alt"></i> Sunday, November 23, 2025</div>
+                <div class="time"><i class="fas fa-clock"></i> 08:00 AM onwards</div>
+                <div class="venue-text"><i class="fas fa-map-marker-alt"></i> Sri Vignesh Mahal A/C, Pammal, Chennai</div>
+            </div>
+        </div>
+
+        <!-- Final Message -->
+        <div class="quote">
+            We can't wait to welcome you with hearts full of love, laughter, and gratitude.<br>
+            Your presence will add warmth and joy to every moment of our special day.<br><br>
+            "Love is not just a feeling — it's a promise that protects, trusts, hopes, and lasts beyond time." <i class="fas fa-heart"></i>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-text">
+                <strong><i class="fas fa-hands-praying"></i> With Blessings & Best Compliments</strong>
+            </div>
+            
+            <div class="footer-text">
+                <strong>Groom's Family</strong><br>
+                Shri. R. Selvam & Smt. S. Devi
+            </div>
+
+            <div class="footer-text">
+                <strong>Bride's Family</strong><br>
+                Shri. K. Muthuraj & Smt. M. Sumathi
+            </div>
+
+            <div class="footer-text">
+                <strong>With Best Compliments</strong><br>
+                Shri. D. Saravanakumar & Smt. S. Indra<br>
+                Master S. Saimagizhan & Master S. Sainavizhan<br>
+                Ms. M. Varsha
+            </div>
+
+            <div class="footer-text" style="margin-top: 30px;">
+                <i class="fas fa-camera"></i> Our Special Moments & Memories<br>
+                Every moment we've shared tells a story — of laughter, love, and destiny's beautiful design.
+            </div>
+
+            <div class="footer-text" style="margin-top: 20px;">
+                <strong>With Love <i class="fas fa-heart"></i></strong><br>
+                Rajiv & Pradeepa
+            </div>
+
+            <div class="hashtags">
+                #RajivWedsPradeepa #TwoStatesOneLove
+            </div>
+
+            <div class="footer-text" style="margin-top: 20px; font-size: 0.9rem;">
+                Crafted with <i class="fas fa-heart"></i> by two hearts that became one.<br>
+                © 2025 Rajiv & Pradeepa Wedding
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const CONFIG = {
+            maxParticles: 25,
+            trailColor: '#FFB6C1',
+            cursorSize: 15,
+            glowRadius: 20,
+            fadeSpeed: 0.015,
+            nightColor: '#E6CEE3',
+            sparkleColors: ['#FFB6C1', '#FFC1CB', '#FFD7E5', '#FFE4E1', '#FFC0CB']
+        };
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let particles = [];
+        let animationId;
+        let idleTimer = null;
+        let isHovering = false;
+        let isNightMode = false;
+        let isClicking = false;
+
+        const cursor = document.getElementById('customCursor');
+        const canvas = document.getElementById('trailCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Hide cursor elements on mobile
+        if (window.innerWidth <= 768) {
+            cursor.style.display = 'none';
+            canvas.style.display = 'none';
+        }
+
+        class Particle {
+            constructor(x, y, isClick = false, isSparkle = false) {
+                this.x = x;
+                this.y = y;
+                this.size = isClick ? (Math.random() * 15 + 10) : (Math.random() * 8 + 3);
+                this.vx = (Math.random() - 0.5) * (isClick ? 4 : 2);
+                this.vy = (Math.random() - 0.5) * (isClick ? 4 : 2);
+                this.life = 1.0;
+                this.decay = isClick ? 0.03 : CONFIG.fadeSpeed;
+                this.color = isSparkle 
+                    ? CONFIG.sparkleColors[Math.floor(Math.random() * CONFIG.sparkleColors.length)]
+                    : CONFIG.trailColor;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = (Math.random() - 0.5) * 10;
+                this.isClick = isClick;
+                this.type = isSparkle ? 'sparkle' : (Math.random() > 0.7 ? 'heart' : 'circle');
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += 0.15;
+                this.life -= this.decay;
+                this.rotation += this.rotationSpeed;
+                
+                if (this.isClick) {
+                    this.size *= 0.98;
+                }
+                
+                return this.life > 0;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.life;
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+
+                if (this.type === 'heart') {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.moveTo(0, this.size * 0.5);
+                    ctx.bezierCurveTo(0, -this.size * 0.3, this.size * 0.6, -this.size * 0.3, this.size * 0.6, 0);
+                    ctx.bezierCurveTo(this.size * 0.6, this.size * 0.3, 0, this.size * 0.8, 0, this.size);
+                    ctx.bezierCurveTo(0, this.size * 0.8, -this.size * 0.6, this.size * 0.3, -this.size * 0.6, 0);
+                    ctx.bezierCurveTo(-this.size * 0.6, -this.size * 0.3, 0, -this.size * 0.3, 0, this.size * 0.5);
+                    ctx.fill();
+                } else if (this.type === 'sparkle') {
+                    ctx.fillStyle = this.color;
+                    ctx.strokeStyle = '#FFFFFF';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    const spikes = 5;
+                    const outerRadius = this.size;
+                    const innerRadius = this.size * 0.5;
+                    
+                    for (let i = 0; i < spikes * 2; i++) {
+                        const radius = i % 2 === 0 ? outerRadius : innerRadius;
+                        const angle = (Math.PI * i) / spikes;
+                        const x = Math.cos(angle) * radius;
+                        const y = Math.sin(angle) * radius;
+                        if (i === 0) {
+                            ctx.moveTo(x, y);
+                        } else {
+                            ctx.lineTo(x, y);
+                        }
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+                } else {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = this.color;
+                    ctx.fill();
+                }
+
+                ctx.restore();
+            }
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth <= 768) return;
+            
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+
+            if (particles.length < CONFIG.maxParticles && !isClicking) {
+                particles.push(new Particle(mouseX, mouseY));
+            }
+
+            clearTimeout(idleTimer);
+            idleTimer = setTimeout(() => {
+                createIdleAnimation();
+            }, 3000);
+        });
+
+        document.querySelectorAll('a, button, .card, .quote, .footer, .timeline-item, .section-title').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                if (window.innerWidth <= 768) return;
+                isHovering = true;
+                cursor.style.transform = 'scale(1.5)';
+                cursor.style.transition = 'transform 0.3s ease';
+                
+                for (let i = 0; i < 5; i++) {
+                    particles.push(new Particle(mouseX + (Math.random() - 0.5) * 30, 
+                                                 mouseY + (Math.random() - 0.5) * 30, 
+                                                 false, 
+                                                 true));
+                }
+            });
+
+            el.addEventListener('mouseleave', () => {
+                if (window.innerWidth <= 768) return;
+                isHovering = false;
+                cursor.style.transform = 'scale(1)';
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) return;
+            
+            isClicking = true;
+            cursor.style.transform = 'scale(1.3)';
+            
+            for (let i = 0; i < 8; i++) {
+                particles.push(new Particle(e.clientX, e.clientY, true));
+            }
+            
+            setTimeout(() => {
+                cursor.style.transform = 'scale(1)';
+                isClicking = false;
+            }, 200);
+        });
+
+        function createIdleAnimation() {
+            if (window.innerWidth <= 768) return;
+            if (particles.length < CONFIG.maxParticles - 10) {
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        particles.push(new Particle(
+                            mouseX + (Math.random() - 0.5) * 100,
+                            mouseY + (Math.random() - 0.5) * 100,
+                            false,
+                            true
+                        ));
+                    }, i * 100);
+                }
+            }
+        }
+
+        function animate() {
+            if (window.innerWidth > 768) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const particle = particles[i];
+                    
+                    if (!particle.update()) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+                    
+                    particle.draw();
+                }
+
+                if (isHovering) {
+                    const pulse = 1 + Math.sin(Date.now() / 200) * 0.1;
+                    cursor.style.transform = `scale(${1.5 * pulse})`;
+                }
+            }
+
+            animationId = requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        function toggleTheme() {
+            const body = document.body;
+            const toggle = document.querySelector('.theme-toggle');
+            
+            isNightMode = !isNightMode;
+            
+            if (isNightMode) {
+                body.classList.add('night-mode');
+                toggle.innerHTML = '<i class="fas fa-sun"></i> Day Mode';
+                CONFIG.trailColor = '#E6CEE3';
+            } else {
+                body.classList.remove('night-mode');
+                toggle.innerHTML = '<i class="fas fa-moon"></i> Night Mode';
+                CONFIG.trailColor = '#FFB6C1';
+            }
+        }
+
+        cursor.style.left = mouseX + 'px';
+        cursor.style.top = mouseY + 'px';
+    </script>
+</body>
+</html>
