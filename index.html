@@ -1564,6 +1564,20 @@
                 padding: 0 10px;
                 box-sizing: border-box;
             }
+
+            /* Make share heading display on 3 lines on mobile */
+            .share-heading {
+                display: block !important;
+                text-align: center;
+            }
+
+            .with-love-line,
+            .heart-line,
+            .names-line {
+                display: block;
+                margin: 5px 0;
+                line-height: 1.3;
+            }
         }
 
         @media (max-width: 480px) {
@@ -2764,7 +2778,9 @@
             </p>
             
             <h2 class="share-heading scroll-reveal fade-in" style="margin-top: 60px; margin-bottom: 30px;">
-                <span class="with-love">With Love</span><span class="heart">❤️</span><span>Rajiv & Pradeepa</span>
+                <div class="with-love-line">With Love</div>
+                <div class="heart-line">❤️</div>
+                <div class="names-line">Rajiv & Pradeepa</div>
             </h2>
             
             <div class="share-hashtags scroll-reveal fade-in" style="margin-bottom: 40px;">
