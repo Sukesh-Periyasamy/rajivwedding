@@ -39,37 +39,40 @@
 
         .heart-loader {
             font-size: 80px;
-            animation: heartbeat 1.5s ease-in-out infinite;
+            animation: heartbeat 1.2s ease-in-out infinite;
             margin-bottom: 30px;
+            display: inline-block;
         }
 
         .heart-loader::before {
             content: '💖';
-            animation: rotateHeart 2s linear infinite;
             display: inline-block;
         }
 
         @keyframes heartbeat {
-            0%, 100% {
+            0% {
                 transform: scale(1);
             }
-            10%, 30% {
-                transform: scale(1.1);
+            10% {
+                transform: scale(1.2);
             }
             20% {
+                transform: scale(1);
+            }
+            30% {
                 transform: scale(1.15);
             }
-            50% {
-                transform: scale(1.05);
+            40% {
+                transform: scale(1);
             }
-        }
-
-        @keyframes rotateHeart {
-            0% {
-                transform: rotate(0deg);
+            50% {
+                transform: scale(1.1);
+            }
+            60% {
+                transform: scale(1);
             }
             100% {
-                transform: rotate(360deg);
+                transform: scale(1);
             }
         }
 
