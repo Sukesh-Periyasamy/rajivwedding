@@ -1391,6 +1391,15 @@
                 padding: 40px 25px;
             }
 
+            .gallery-section {
+                padding: 40px 20px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
             .decorative-line {
                 width: 150px;
             }
@@ -1886,6 +1895,81 @@
             margin: 8px 0;
         }
 
+        /* Gallery Section */
+        .gallery-section {
+            margin: 80px 0;
+            padding: 60px 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            aspect-ratio: 4/5;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.15);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-date {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 30px 20px 20px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-date {
+            transform: translateY(0);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(255, 194, 209, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
         .site-footer .copyright {
             font-family: 'Montserrat', sans-serif;
             font-size: var(--font-sm);
@@ -2309,6 +2393,46 @@
                     Shri. D. Saravanakumar & Smt. S. Indra<br>
                     Master S. Saimagizhan & Master S. Sainavizhan<br>
                     Ms. M. Varsha
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <div class="gallery-section glass-card scroll-reveal glow-on-scroll">
+            <h2 class="section-title reveal-text"><span>📸 Our Special Moments</span></h2>
+            <p style="text-align: center; margin-bottom: 40px; color: var(--text-light); font-size: 1.2rem;">Every moment we've shared tells a story — of laughter, love, and destiny's beautiful design.</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item scroll-reveal-scale zoom-in-effect stagger-1">
+                    <img src="August 10th 2025.jpeg" alt="August 10th, 2025 - Our First Drive">
+                    <div class="gallery-date">
+                        <i class="fas fa-calendar-alt" style="margin-right: 8px;"></i>
+                        August 10, 2025
+                    </div>
+                </div>
+
+                <div class="gallery-item scroll-reveal-scale zoom-in-effect stagger-2">
+                    <img src="Aug 29th 2025.jpeg" alt="August 29th, 2025 - Our Engagement">
+                    <div class="gallery-date">
+                        <i class="fas fa-calendar-alt" style="margin-right: 8px;"></i>
+                        August 29, 2025
+                    </div>
+                </div>
+
+                <div class="gallery-item scroll-reveal-scale zoom-in-effect stagger-3">
+                    <img src="Oct 15th 2025.jpeg" alt="October 15th, 2025 - Our First Date">
+                    <div class="gallery-date">
+                        <i class="fas fa-calendar-alt" style="margin-right: 8px;"></i>
+                        October 15, 2025
+                    </div>
+                </div>
+
+                <div class="gallery-item scroll-reveal-scale zoom-in-effect stagger-4">
+                    <img src="Oct 26th 2025.jpeg" alt="October 26th, 2025 - Our Special Meetup">
+                    <div class="gallery-date">
+                        <i class="fas fa-calendar-alt" style="margin-right: 8px;"></i>
+                        October 26, 2025
+                    </div>
                 </div>
             </div>
         </div>
