@@ -1150,8 +1150,8 @@
             margin-right: 10px;
         }
 
-        /* Footer */
-        .footer {
+        /* Compliments Card (previously .footer) */
+        .compliments-card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 229, 236, 0.6));
             backdrop-filter: blur(15px);
             border-radius: 30px;
@@ -1207,7 +1207,7 @@
         }
 
         /* Mobile Responsive */
-        @media (max-width: 768px) {
+    @media (max-width: 768px) {
             body {
                 cursor: auto;
             }
@@ -1321,7 +1321,7 @@
                 font-size: 1rem;
             }
 
-            .footer {
+            .compliments-card {
                 padding: 40px 25px;
             }
 
@@ -1357,6 +1357,49 @@
 
         a, button {
             cursor: none;
+        }
+
+        /* Site Footer (separate from compliments card) */
+        .site-footer {
+            margin-top: 60px;
+            padding: 30px 20px;
+            text-align: center;
+            color: var(--text-dark);
+        }
+
+        .site-footer .hashtags {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            color: var(--accent-rose);
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .site-footer .footer-note {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin: 8px 0;
+        }
+
+        .site-footer .copyright {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .site-footer .footer-contact {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-top: 8px;
+        }
+
+        .site-footer .footer-contact a {
+            color: var(--accent-rose);
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -1601,8 +1644,8 @@
             </p>
         </div>
 
-        <!-- Footer -->
-        <div class="footer">
+        <!-- Compliments Card -->
+        <div class="compliments-card">
             <div class="footer-title">With Blessings & Best Compliments</div>
             
             <div class="family-section">
@@ -1627,15 +1670,18 @@
                     Ms. M. Varsha
                 </div>
             </div>
-
-            <div class="hashtags">#RajivWedsPradeepa #TwoStatesOneLove</div>
-
-            <div class="footer-note">
-                Crafted with ❤️ by two hearts that became one<br>
-                © 2025 Rajiv & Pradeepa Wedding
-            </div>
         </div>
     </div>
+
+    <!-- Site Footer (separate section) -->
+    <footer class="site-footer" aria-label="Site Footer">
+        <div class="site-footer-inner">
+            <div class="hashtags">#RajivWedsPradeepa</div>
+            <div class="footer-note">Crafted with ❤️ by two hearts that became one</div>
+            <div class="footer-contact">For more beautiful designs contact <a href="https://sukeshiitj.me" target="_blank" rel="noopener">sukeshiitj.me</a></div>
+            <div class="copyright">© 2025 Rajiv & Pradeepa Wedding</div>
+        </div>
+    </footer>
 
     <script>
         const CONFIG = {
