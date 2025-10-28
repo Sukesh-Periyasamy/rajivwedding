@@ -3509,44 +3509,52 @@
         console.log('%cCrafted with love and attention to detail', 'font-size: 14px; color: #C2185B;');
 
         // Tamil/English Toggle Function
-        function toggleLanguage() {
+        window.toggleLanguage = function() {
             const selectField = document.querySelector(".goog-te-combo");
             const button = document.getElementById("langToggle");
 
             if (!selectField) {
-                alert("Please wait a moment, translation is still loading...");
+                console.log("Google Translate not loaded yet, waiting...");
+                setTimeout(() => {
+                    window.toggleLanguage();
+                }, 500);
                 return;
             }
 
-            if (button.innerText === "தமிழ்") {
+            if (button.innerText === "தமிழ்" || button.innerText === "Tamil") {
                 // Change to Tamil
                 selectField.value = "ta";
-                selectField.dispatchEvent(new Event("change"));
+                const changeEvent = new Event('change', { bubbles: true });
+                selectField.dispatchEvent(changeEvent);
                 button.innerText = "English";
             } else {
                 // Change to English
                 selectField.value = "";
-                selectField.dispatchEvent(new Event("change"));
+                const changeEvent = new Event('change', { bubbles: true });
+                selectField.dispatchEvent(changeEvent);
                 button.innerText = "தமிழ்";
             }
         }
+    </script>
 
-        // Initialize Google Translate
+    <!-- Initialize Google Translate -->
+    <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
                 includedLanguages: 'ta',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
             }, 'google_translate_element');
         }
     </script>
 
-    <!-- Google Translate Container (hidden) -->
-    <div id="google_translate_element" style="display: none;"></div>
+    <!-- Google Translate Container -->
+    <div id="google_translate_element"></div>
 
     <!-- Tamil/English Toggle Button -->
     <button id="langToggle"
-            onclick="toggleLanguage()"
+            onclick="window.toggleLanguage()"
             style="
                 position: fixed;
                 top: 15px;
@@ -3579,7 +3587,8 @@
         .goog-logo-link,
         .goog-te-gadget span,
         .goog-te-banner-frame.skiptranslate,
-        .goog-te-gadget-icon {
+        .goog-te-gadget-icon,
+        .goog-te-banner-frame {
             display: none !important;
         }
         body {
@@ -3589,6 +3598,16 @@
         /* Style the Google Translate dropdown if it appears */
         .goog-te-gadget {
             font-size: 0 !important;
+            display: none !important;
+        }
+        
+        #google_translate_element {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
         }
         
         /* Improve language toggle button on mobile */
