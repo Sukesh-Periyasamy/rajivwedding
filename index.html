@@ -1291,41 +1291,71 @@
 
         /* Compliments Card (previously .footer) */
         .compliments-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 229, 236, 0.6));
-            backdrop-filter: blur(15px);
-            border-radius: 30px;
-            padding: 60px;
+            background: transparent;
+            padding: 60px 30px;
             margin-top: 80px;
-            border: 1px solid rgba(255, 194, 209, 0.4);
         }
 
         .footer-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--deep-rose);
-            font-weight: 700;
-            margin-bottom: 30px;
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--gold);
+            font-weight: 400;
+            margin-bottom: 60px;
+            text-align: center;
+            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.8);
         }
 
-        .family-section {
-            margin: 30px 0;
+        .family-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .family-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .family-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
         .family-title {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            letter-spacing: 2px;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--text-light);
-            margin-bottom: 10px;
-            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
         }
 
         .family-names {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
             color: var(--text-dark);
-            line-height: 1.8;
+            line-height: 2;
+            text-align: center;
+        }
+
+        .family-names .name {
+            display: block;
+        }
+
+        .family-names .ampersand {
+            font-size: 1rem;
+            color: var(--gold);
+            margin: 8px 0;
+            font-weight: 700;
         }
 
         .hashtags {
@@ -1476,6 +1506,24 @@
 
             .compliments-card {
                 padding: 40px 25px;
+            }
+
+            .footer-title {
+                font-size: clamp(2rem, 4vw, 3.5rem);
+                margin-bottom: 40px;
+            }
+
+            .family-cards {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .family-card {
+                padding: 30px 20px;
+            }
+
+            .family-names {
+                font-size: 1rem;
             }
 
             .gallery-section {
@@ -2692,26 +2740,36 @@
         <div class="compliments-card scroll-reveal fade-in">
             <div class="footer-title">With Blessings & Best Compliments</div>
             
-            <div class="family-section">
-                <div class="family-title">Groom's Family</div>
-                <div class="family-names">
-                    Shri. R. Selvam & Smt. S. Devi
+            <div class="family-cards">
+                <div class="family-card scroll-reveal-scale zoom-in-effect stagger-1">
+                    <div class="family-title">Groom's Family</div>
+                    <div class="family-names">
+                        <span class="name">Shri. R. Selvam</span>
+                        <span class="ampersand">&</span>
+                        <span class="name">Smt. S. Devi</span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="family-section">
-                <div class="family-title">Bride's Family</div>
-                <div class="family-names">
-                    Shri. K. Muthuraj & Smt. M. Sumathi
+                <div class="family-card scroll-reveal-scale zoom-in-effect stagger-2">
+                    <div class="family-title">Bride's Family</div>
+                    <div class="family-names">
+                        <span class="name">Shri. K. Muthuraj</span>
+                        <span class="ampersand">&</span>
+                        <span class="name">Smt. M. Sumathi</span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="family-section">
-                <div class="family-title">With Best Compliments</div>
-                <div class="family-names">
-                    Shri. D. Saravanakumar & Smt. S. Indra<br>
-                    Master S. Saimagizhan & Master S. Sainavizhan<br>
-                    Ms. M. Varsha
+                <div class="family-card scroll-reveal-scale zoom-in-effect stagger-3">
+                    <div class="family-title">With Best Compliments</div>
+                    <div class="family-names">
+                        <span class="name">Shri. D. Saravanakumar</span>
+                        <span class="ampersand">&</span>
+                        <span class="name">Smt. S. Indra</span>
+                        <br>
+                        <span class="name" style="font-size: 0.95rem; color: var(--text-light);">Master S. Saimagizhan & Master S. Sainavizhan</span>
+                        <br>
+                        <span class="name" style="font-size: 0.95rem; color: var(--text-light);">Ms. M. Varsha</span>
+                    </div>
                 </div>
             </div>
         </div>
