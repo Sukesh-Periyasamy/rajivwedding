@@ -1511,6 +1511,30 @@
             .countdown-label {
                 font-size: clamp(0.6rem, 1.8vw, 0.8rem);
             }
+
+            .share-section {
+                margin: 60px auto;
+                padding: 40px 20px;
+            }
+
+            .share-heading {
+                font-size: clamp(2.5rem, 5vw, 4rem);
+                margin-bottom: 30px;
+            }
+
+            .share-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .share-button {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+                padding: 16px 35px;
+                font-size: 1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1975,6 +1999,104 @@
             line-height: 1.8;
             max-width: 600px;
             margin: 0 auto;
+        }
+
+        /* Share Section */
+        .share-section {
+            margin: 80px auto;
+            padding: 60px 30px;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .share-heading {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: var(--gold);
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.9);
+            line-height: 1.2;
+        }
+
+        .share-heading .with-love {
+            margin-right: 20px;
+        }
+
+        .share-heading .heart {
+            font-size: 1.2em;
+            display: inline-block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        .share-hashtags {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--deep-rose);
+            margin-bottom: 40px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .share-hashtags span {
+            display: block;
+            margin: 8px 0;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .share-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            color: white;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .share-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .share-button:hover::before {
+            left: 100%;
+        }
+
+        .share-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .share-button i {
+            font-size: 1.3rem;
+        }
+
+        .share-button.whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+
+        .share-button.instagram {
+            background: linear-gradient(135deg, #E4405F, #833AB4);
         }
 
         /* Site Footer (separate from compliments card) */
@@ -2611,15 +2733,39 @@
         </div>
     </section>
 
-    <!-- Site Footer (separate section) -->
-    <footer class="site-footer" aria-label="Site Footer">
+    <!-- Share Section -->
+    <section class="share-section">
+        <h2 class="share-heading scroll-reveal fade-in">
+            <span class="with-love">With Love</span><span class="heart">❤️</span><span>Rajiv & Pradeepa</span>
+        </h2>
+        
+        <div class="share-hashtags scroll-reveal fade-in">
+            <span>#RajivWedsPradeepa</span>
+            <span>#TwoStatesOneLove</span>
+        </div>
+
+        <div class="share-buttons scroll-reveal fade-in">
+            <a href="https://wa.me/?text=Invitation%20to%20Rajiv%20%26%20Pradeepa%20Wedding%20-%20November%2023%2C%202025" 
+               target="_blank" 
+               class="share-button whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                <span>Share on WhatsApp</span>
+            </a>
+            
+            <a href="https://www.instagram.com/create/story/" 
+               target="_blank" 
+               class="share-button instagram">
+                <i class="fab fa-instagram"></i>
+                <span>Share on Instagram</span>
+            </a>
+        </div>
+
         <div class="site-footer-inner">
-            <div class="hashtags">#RajivWedsPradeepa</div>
-            <div class="footer-note">Crafted with ❤️ by two hearts that became one</div>
-            <div class="footer-contact">For more beautiful designs contact <a href="https://sukeshiitj.me" target="_blank" rel="noopener">sukeshiitj.me</a></div>
+            <div class="footer-note">Designed with ❤️ by the couple</div>
+            <div class="footer-contact">Want a stunning website? <a href="https://sukeshiitj.me" target="_blank" rel="noopener">sukeshiitj.me</a></div>
             <div class="copyright">© 2025 Rajiv & Pradeepa Wedding</div>
         </div>
-    </footer>
+    </section>
 
     <script>
         const CONFIG = {
