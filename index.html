@@ -441,6 +441,30 @@
             margin-top: 20px;
         }
 
+        /* Map Link Button */
+        .map-button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+            cursor: pointer;
+        }
+
+        .map-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.5);
+        }
+
+        .map-button i {
+            margin-right: 8px;
+        }
+
         .theme-toggle {
             position: fixed;
             top: 20px;
@@ -588,6 +612,16 @@
 
             .venue-text {
                 font-size: 1.1rem;
+            }
+
+            .map-button {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+                margin-top: 12px;
+            }
+
+            .map-button i {
+                font-size: 0.9rem;
             }
 
             .theme-toggle {
@@ -787,25 +821,41 @@
         <div class="section">
             <div class="section-title"><i class="fas fa-heart"></i> Upcoming Moments of Forever</div>
 
+            <!-- Venue Information -->
+            <div class="card" style="margin-bottom: 30px; background: linear-gradient(135deg, rgba(255, 182, 193, 0.5), rgba(255, 182, 193, 0.3)); border: 3px solid rgba(255, 182, 193, 0.6);">
+                <div style="font-size: 1.5rem; color: #9B2D5F; font-weight: bold; margin-bottom: 15px;">
+                    <i class="fas fa-map-marker-alt"></i> Venue
+                </div>
+                <div style="font-size: 1.3rem; color: #D81B5F; font-weight: bold; margin-bottom: 10px;">
+                    Sri Vignesh Mahal A/C
+                </div>
+                <div class="venue-text" style="font-size: 1.1rem; line-height: 1.8;">
+                    7th Cross Street, Nallathambi Main Rd<br>
+                    Pammal, Chennai
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Sri+Vignesh+Mahal+Pammal+Chennai" 
+                   target="_blank" 
+                   class="map-button">
+                    <i class="fas fa-directions"></i> Get Directions
+                </a>
+            </div>
+
             <div class="card date-card">
                 <div class="date-title"><i class="fas fa-wine-glass"></i> Reception</div>
                 <div class="date"><i class="fas fa-calendar-alt"></i> Saturday, November 22, 2025</div>
                 <div class="time"><i class="fas fa-clock"></i> 06:30 PM onwards</div>
-                <div class="venue-text"><i class="fas fa-map-marker-alt"></i> Sri Vignesh Mahal A/C, 7th Cross Street, Nallathambi Main Rd, Pammal, Chennai</div>
             </div>
 
             <div class="card date-card">
                 <div class="date-title"><i class="fas fa-heart"></i> Wedding Ceremony</div>
                 <div class="date"><i class="fas fa-calendar-alt"></i> Sunday, November 23, 2025</div>
                 <div class="time"><i class="fas fa-clock"></i> 06:00 AM onwards</div>
-                <div class="venue-text"><i class="fas fa-map-marker-alt"></i> Sri Vignesh Mahal A/C, 7th Cross Street, Nallathambi Main Rd, Pammal, Chennai</div>
             </div>
 
             <div class="card date-card">
                 <div class="date-title"><i class="fas fa-leaf"></i> Nagavalli Mukurtham</div>
                 <div class="date"><i class="fas fa-calendar-alt"></i> Sunday, November 23, 2025</div>
                 <div class="time"><i class="fas fa-clock"></i> 08:00 AM onwards</div>
-                <div class="venue-text"><i class="fas fa-map-marker-alt"></i> Sri Vignesh Mahal A/C, Pammal, Chennai</div>
             </div>
         </div>
 
