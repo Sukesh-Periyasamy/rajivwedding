@@ -175,6 +175,19 @@
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
+        @keyframes ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                width: 200px;
+                height: 200px;
+                opacity: 0;
+            }
+        }
+
         .card-title {
             font-size: 1.3rem;
             color: #9B2D5F;
@@ -514,7 +527,7 @@
             }
 
             #trailCanvas {
-                display: none;
+                display: block; /* Keep canvas visible for particle effects */
             }
 
             .container {
@@ -941,10 +954,9 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // Hide cursor elements on mobile
+        // Hide cursor on mobile (but keep canvas for particles)
         if (window.innerWidth <= 768) {
             cursor.style.display = 'none';
-            canvas.style.display = 'none';
         }
 
         class Particle {
@@ -1089,6 +1101,68 @@
             }, 200);
         });
 
+        // Mobile touch effects
+        let lastTouchTime = 0;
+        
+        document.addEventListener('touchstart', (e) => {
+            if (window.innerWidth > 768) return;
+            
+            const touch = e.touches[0];
+            const currentTime = Date.now();
+            
+            // Create click bloom effect on touch
+            for (let i = 0; i < 12; i++) {
+                particles.push(new Particle(touch.clientX, touch.clientY, true));
+            }
+            
+            // Add ripple effect
+            createRippleEffect(touch.clientX, touch.clientY);
+            
+            // Double tap detection for more sparkles
+            if (currentTime - lastTouchTime < 300) {
+                for (let i = 0; i < 15; i++) {
+                    particles.push(new Particle(touch.clientX + (Math.random() - 0.5) * 50, 
+                                                 touch.clientY + (Math.random() - 0.5) * 50, 
+                                                 false, 
+                                                 true));
+                }
+            }
+            
+            lastTouchTime = currentTime;
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (window.innerWidth > 768) return;
+            
+            const touch = e.touches[0];
+            
+            // Create trail particles on touch move (mobile)
+            if (particles.length < CONFIG.maxParticles && Date.now() % 3 === 0) {
+                particles.push(new Particle(touch.clientX, touch.clientY));
+            }
+        });
+
+        // Ripple effect function for mobile
+        function createRippleEffect(x, y) {
+            const ripple = document.createElement('div');
+            ripple.style.position = 'fixed';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.style.width = '0';
+            ripple.style.height = '0';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'radial-gradient(circle, rgba(255, 182, 193, 0.6), transparent)';
+            ripple.style.transform = 'translate(-50%, -50%)';
+            ripple.style.pointerEvents = 'none';
+            ripple.style.zIndex = '10000';
+            ripple.style.animation = 'ripple 0.6s ease-out';
+            document.body.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+
         function createIdleAnimation() {
             if (window.innerWidth <= 768) return;
             if (particles.length < CONFIG.maxParticles - 10) {
@@ -1106,24 +1180,24 @@
         }
 
         function animate() {
-            if (window.innerWidth > 768) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Always animate particles (works on both desktop and mobile)
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                for (let i = particles.length - 1; i >= 0; i--) {
-                    const particle = particles[i];
-                    
-                    if (!particle.update()) {
-                        particles.splice(i, 1);
-                        continue;
-                    }
-                    
-                    particle.draw();
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const particle = particles[i];
+                
+                if (!particle.update()) {
+                    particles.splice(i, 1);
+                    continue;
                 }
+                
+                particle.draw();
+            }
 
-                if (isHovering) {
-                    const pulse = 1 + Math.sin(Date.now() / 200) * 0.1;
-                    cursor.style.transform = `scale(${1.5 * pulse})`;
-                }
+            // Cursor effects only on desktop
+            if (window.innerWidth > 768 && isHovering) {
+                const pulse = 1 + Math.sin(Date.now() / 200) * 0.1;
+                cursor.style.transform = `scale(${1.5 * pulse})`;
             }
 
             animationId = requestAnimationFrame(animate);
