@@ -637,7 +637,7 @@
 
         .couple-names {
             font-family: 'Great Vibes', cursive;
-            font-size: var(--font-3xl);
+            font-size: clamp(3.5rem, 10vw, 7rem);
             background: linear-gradient(135deg, var(--primary-pink), var(--accent-rose), var(--deep-rose));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -665,11 +665,21 @@
 
         .ampersand {
             font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
-            color: var(--gold);
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: #DC143C;
             margin: 0 20px;
             display: inline-block;
-            animation: rotate 3s ease-in-out infinite;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            filter: drop-shadow(0 4px 12px rgba(220, 20, 60, 0.5));
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.15);
+            }
         }
 
         @keyframes rotate {
@@ -1288,7 +1298,7 @@
             }
 
             .couple-names {
-                font-size: 3rem;
+                font-size: 4rem;
                 text-shadow: 4px 4px 16px rgba(255, 255, 255, 1), 0 0 50px rgba(255, 255, 255, 0.9) !important;
             }
 
@@ -1409,7 +1419,7 @@
 
         @media (max-width: 480px) {
             .couple-names {
-                font-size: 2.5rem;
+                font-size: 3.5rem;
             }
 
             .section-title {
@@ -2153,7 +2163,7 @@
             <div class="decorative-line"></div>
             <h1 class="main-title">The Wedding Celebration of</h1>
             <div class="couple-names">
-                Rajiv <span class="ampersand">&</span> Pradeepa
+                Rajiv <span class="ampersand">❤️</span> Pradeepa
             </div>
             <div class="decorative-line"></div>
             <p class="tagline">Two Hearts, One Soul — Bound by Love Forever</p>
