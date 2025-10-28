@@ -3566,13 +3566,14 @@
     </script>
 
     <!-- Google Translate Container -->
-    <div id="google_translate_element" style="display: block !important;"></div>
+    <div id="google_translate_element" style="display: none;"></div>
 
     <!-- Initialize Google Translate -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
             if (typeof google !== 'undefined' && google.translate && google.translate.TranslateElement) {
                 try {
+                    console.log('Initializing Google Translate...');
                     new google.translate.TranslateElement({
                         pageLanguage: 'en',
                         includedLanguages: 'ta,en',
@@ -3580,22 +3581,23 @@
                         autoDisplay: false
                     }, 'google_translate_element');
                     
-                    // Hide it after loading
+                    console.log('Google Translate initialized successfully');
+                    
+                    // Wait a bit then hide
                     setTimeout(() => {
                         const googElement = document.getElementById('google_translate_element');
                         if (googElement) {
-                            googElement.style.position = 'fixed';
+                            googElement.style.position = 'absolute';
                             googElement.style.top = '-9999px';
                             googElement.style.left = '-9999px';
-                            googElement.style.width = '1px';
-                            googElement.style.height = '1px';
-                            googElement.style.opacity = '0';
-                            googElement.style.zIndex = '-9999';
+                            console.log('Google Translate element hidden');
                         }
-                    }, 1000);
+                    }, 2000);
                 } catch(e) {
                     console.error('Google Translate initialization error:', e);
                 }
+            } else {
+                console.error('Google Translate API not available');
             }
         }
     </script>
@@ -3633,7 +3635,7 @@
     <!-- Hide Google Translate Toolbar -->
     <style>
         /* Hide Google Translate banner */
-        .goog-te-banner-frame.skiptranslate {
+        .goog-te-banner-frame {
             display: none !important;
         }
         
@@ -3642,28 +3644,11 @@
             top: 0 !important;
         }
         
-        /* Hide the gadget icon but keep the functionality */
-        .goog-te-gadget-icon {
-            display: none !important;
-        }
-        
-        /* Make the translate element invisible but functional */
-        #google_translate_element {
-            position: fixed !important;
-            top: -9999px !important;
+        /* Style the Google Translate select */
+        .goog-te-combo {
+            visibility: hidden !important;
+            position: absolute !important;
             left: -9999px !important;
-            opacity: 0 !important;
-            width: 1px !important;
-            height: 1px !important;
-            overflow: hidden !important;
-            z-index: -9999 !important;
-            pointer-events: none !important;
-        }
-        
-        /* Hide the gadget branding */
-        .goog-te-gadget-simple {
-            background-color: transparent !important;
-            border: none !important;
         }
         
         /* Improve language toggle button on mobile */
