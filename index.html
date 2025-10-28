@@ -3566,38 +3566,41 @@
     </script>
 
     <!-- Google Translate Container -->
-    <div id="google_translate_element" style="display: none;"></div>
+    <div id="google_translate_element" style="position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; overflow: hidden;"></div>
 
     <!-- Initialize Google Translate -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
+            console.log('googleTranslateElementInit called');
+            console.log('typeof google:', typeof google);
+            
             if (typeof google !== 'undefined' && google.translate && google.translate.TranslateElement) {
                 try {
                     console.log('Initializing Google Translate...');
                     new google.translate.TranslateElement({
                         pageLanguage: 'en',
-                        includedLanguages: 'ta,en',
+                        includedLanguages: 'ta',
                         layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
                         autoDisplay: false
                     }, 'google_translate_element');
                     
                     console.log('Google Translate initialized successfully');
                     
-                    // Wait a bit then hide
+                    // Check for the select element
                     setTimeout(() => {
-                        const googElement = document.getElementById('google_translate_element');
-                        if (googElement) {
-                            googElement.style.position = 'absolute';
-                            googElement.style.top = '-9999px';
-                            googElement.style.left = '-9999px';
-                            console.log('Google Translate element hidden');
+                        const selectField = document.querySelector(".goog-te-combo");
+                        if (selectField) {
+                            console.log('Google Translate select found');
+                        } else {
+                            console.warn('Google Translate select not found after initialization');
                         }
-                    }, 2000);
+                    }, 3000);
                 } catch(e) {
                     console.error('Google Translate initialization error:', e);
                 }
             } else {
                 console.error('Google Translate API not available');
+                console.log('google:', google);
             }
         }
     </script>
@@ -3635,7 +3638,7 @@
     <!-- Hide Google Translate Toolbar -->
     <style>
         /* Hide Google Translate banner */
-        .goog-te-banner-frame {
+        .goog-te-banner-frame.skiptranslate {
             display: none !important;
         }
         
@@ -3644,11 +3647,20 @@
             top: 0 !important;
         }
         
-        /* Style the Google Translate select */
-        .goog-te-combo {
-            visibility: hidden !important;
+        /* Position the translate element off-screen but don't hide the select */
+        #google_translate_element {
             position: absolute !important;
+            top: -9999px !important;
             left: -9999px !important;
+            width: 1px !important;
+            height: 1px !important;
+            overflow: hidden !important;
+        }
+        
+        /* Hide all Google Translate branding */
+        .goog-te-gadget {
+            font-size: 0 !important;
+            color: transparent !important;
         }
         
         /* Improve language toggle button on mobile */
