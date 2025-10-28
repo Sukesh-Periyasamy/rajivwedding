@@ -3507,6 +3507,99 @@
         // Console message for developers
         console.log('%c💖 Rajiv & Pradeepa Wedding Invitation 💖', 'font-size: 20px; color: #FF6B9D; font-weight: bold;');
         console.log('%cCrafted with love and attention to detail', 'font-size: 14px; color: #C2185B;');
+
+        // Tamil/English Toggle Function
+        function toggleLanguage() {
+            const selectField = document.querySelector(".goog-te-combo");
+            const button = document.getElementById("langToggle");
+
+            if (!selectField) {
+                alert("Please wait a moment, translation is still loading...");
+                return;
+            }
+
+            if (button.innerText === "தமிழ்") {
+                // Change to Tamil
+                selectField.value = "ta";
+                selectField.dispatchEvent(new Event("change"));
+                button.innerText = "English";
+            } else {
+                // Change to English
+                selectField.value = "";
+                selectField.dispatchEvent(new Event("change"));
+                button.innerText = "தமிழ்";
+            }
+        }
+
+        // Initialize Google Translate
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'ta',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
     </script>
+
+    <!-- Google Translate Container (hidden) -->
+    <div id="google_translate_element" style="display: none;"></div>
+
+    <!-- Tamil/English Toggle Button -->
+    <button id="langToggle"
+            onclick="toggleLanguage()"
+            style="
+                position: fixed;
+                top: 15px;
+                right: 15px;
+                padding: 12px 20px;
+                background: linear-gradient(135deg, #d81b60, #e91e63);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                font-weight: bold;
+                font-size: 1rem;
+                cursor: pointer;
+                z-index: 9999;
+                box-shadow: 0 4px 15px rgba(216, 27, 96, 0.4);
+                transition: all 0.3s ease;
+                font-family: 'Montserrat', sans-serif;
+            "
+            onmouseover="this.style.transform='scale(1.05)'"
+            onmouseout="this.style.transform='scale(1)'">
+        தமிழ்
+    </button>
+
+    <!-- Load Google Translate Script -->
+    <script type="text/javascript"
+      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+    <!-- Hide Google Translate Toolbar -->
+    <style>
+        .goog-logo-link,
+        .goog-te-gadget span,
+        .goog-te-banner-frame.skiptranslate,
+        .goog-te-gadget-icon {
+            display: none !important;
+        }
+        body {
+            top: 0 !important;
+        }
+        
+        /* Style the Google Translate dropdown if it appears */
+        .goog-te-gadget {
+            font-size: 0 !important;
+        }
+        
+        /* Improve language toggle button on mobile */
+        @media (max-width: 768px) {
+            #langToggle {
+                top: 10px;
+                right: 10px;
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </body>
 </html>
