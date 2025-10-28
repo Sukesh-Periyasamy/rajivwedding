@@ -1308,9 +1308,9 @@
 
         .family-cards {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
@@ -1356,6 +1356,15 @@
             color: var(--gold);
             margin: 8px 0;
             font-weight: 700;
+        }
+
+        .family-relation {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-style: italic;
+            letter-spacing: 1px;
         }
 
         .hashtags {
@@ -1516,6 +1525,7 @@
             .family-cards {
                 grid-template-columns: 1fr;
                 gap: 25px;
+                max-width: 500px;
             }
 
             .family-card {
@@ -2747,32 +2757,36 @@
             <div class="family-cards">
                 <div class="family-card scroll-reveal-scale zoom-in-effect stagger-1">
                     <div class="family-title">Groom's Family</div>
+                    <div class="family-relation" style="text-align: center; margin-bottom: 20px;">son of</div>
                     <div class="family-names">
                         <span class="name">Shri. R. Selvam</span>
                         <span class="ampersand">&</span>
                         <span class="name">Smt. S. Devi</span>
                     </div>
+                    <div class="family-names" style="margin-top: 30px; font-size: 1rem; font-weight: 600;">
+                        Shri. D. Saravanakumar
+                    </div>
+                    <div class="family-names" style="font-size: 1rem; color: var(--gold);">
+                        &
+                    </div>
+                    <div class="family-names" style="font-size: 1rem;">
+                        Smt. S. Indra
+                    </div>
+                    <div class="family-names" style="font-size: 0.95rem; margin-top: 15px; color: var(--text-light); line-height: 1.4;">
+                        Master S. Saimagizhan & Master S. Sainavizhan
+                    </div>
                 </div>
 
                 <div class="family-card scroll-reveal-scale zoom-in-effect stagger-2">
                     <div class="family-title">Bride's Family</div>
+                    <div class="family-relation" style="text-align: center; margin-bottom: 20px;">daughter of</div>
                     <div class="family-names">
                         <span class="name">Shri. K. Muthuraj</span>
                         <span class="ampersand">&</span>
                         <span class="name">Smt. M. Sumathi</span>
                     </div>
-                </div>
-
-                <div class="family-card scroll-reveal-scale zoom-in-effect stagger-3">
-                    <div class="family-title">With Best Compliments</div>
-                    <div class="family-names">
-                        <span class="name">Shri. D. Saravanakumar</span>
-                        <span class="ampersand">&</span>
-                        <span class="name">Smt. S. Indra</span>
-                        
-                        <span class="name" style="font-size: 0.95rem; color: var(--text-light);">Master S. Saimagizhan & Master S. Sainavizhan</span>
-                        
-                        <span class="name" style="font-size: 0.95rem; color: var(--text-light);">Ms. M. Varsha</span>
+                    <div class="family-names" style="margin-top: 30px; font-size: 0.95rem; color: var(--text-light);">
+                        Ms. M. Varsha
                     </div>
                 </div>
             </div>
