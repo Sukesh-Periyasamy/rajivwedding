@@ -706,6 +706,65 @@
             text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.9), 0 0 20px rgba(255, 255, 255, 0.7);
         }
 
+        /* Countdown Section */
+        .countdown-section {
+            margin: 60px 0;
+            padding: 50px 30px;
+        }
+
+        .countdown-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 600;
+            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.8);
+        }
+
+        .countdown-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .countdown-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(147, 112, 219, 0.15);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .countdown-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(147, 112, 219, 0.25);
+            border-color: var(--gold);
+        }
+
+        .countdown-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .countdown-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
+            color: var(--deep-rose);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
         .scroll-indicator {
             margin-top: 60px;
             animation: bounce-slow 2s ease-in-out infinite;
@@ -1423,6 +1482,34 @@
 
             .decorative-line {
                 width: 150px;
+            }
+
+            .countdown-section {
+                margin: 40px 0;
+                padding: 30px 20px;
+            }
+
+            .countdown-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                max-width: 600px;
+            }
+
+            .countdown-card {
+                padding: 20px 15px;
+            }
+
+            .countdown-title {
+                margin-bottom: 30px;
+                font-size: clamp(1.2rem, 3vw, 2rem);
+            }
+
+            .countdown-number {
+                font-size: clamp(2rem, 5vw, 3rem);
+            }
+
+            .countdown-label {
+                font-size: clamp(0.6rem, 1.8vw, 0.8rem);
             }
         }
 
@@ -2176,6 +2263,30 @@
             </div>
             <div class="decorative-line"></div>
             <p class="tagline">Two Hearts, One Soul — Bound by Love Forever</p>
+            
+            <!-- Countdown Section -->
+            <div class="countdown-section scroll-reveal fade-in">
+                <h2 class="countdown-title">Counting Down to Forever</h2>
+                <div class="countdown-container">
+                    <div class="countdown-card">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-card">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-card">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-card">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="scroll-indicator">
                 <i class="fas fa-chevron-down"></i>
             </div>
@@ -3079,6 +3190,33 @@
                 ticking = true;
             }
         }, { passive: true });
+
+        // Countdown Timer
+        function updateCountdown() {
+            const weddingDate = new Date('2025-11-23T06:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            } else {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
 
         // Console message for developers
         console.log('%c💖 Rajiv & Pradeepa Wedding Invitation 💖', 'font-size: 20px; color: #FF6B9D; font-weight: bold;');
