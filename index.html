@@ -1518,8 +1518,20 @@
             }
 
             .share-heading {
-                font-size: clamp(2.5rem, 5vw, 4rem);
+                font-size: clamp(1.8rem, 4vw, 3rem);
                 margin-bottom: 30px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-wrap: nowrap;
+            }
+
+            .share-heading span {
+                display: inline;
+                white-space: nowrap;
             }
 
             .share-buttons {
@@ -1546,6 +1558,11 @@
                 font-size: 1.8rem;
             }
 
+            .share-heading {
+                font-size: 1.5rem !important;
+                margin-bottom: 25px !important;
+            }
+
             .glass-card {
                 padding: 25px 15px;
             }
@@ -1558,8 +1575,6 @@
             .quote-section::after {
                 font-size: 3rem;
             }
-            
-            
         }
 
         a, button {
