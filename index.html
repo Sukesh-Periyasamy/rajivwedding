@@ -3543,6 +3543,7 @@
 
     <script>
         let translateReady = false;
+        let currentLang = 'en';
 
         function googleTranslateElementInit() {
             console.log("Initializing Google Translate...");
@@ -3559,13 +3560,66 @@
                     translateReady = true;
                     clearInterval(checkInterval);
                     console.log("✅ Google Translate initialized successfully.");
+                    console.log("Select field:", selectField);
                 }
             }, 300);
+        }
+
+        function triggerTranslation(lang) {
+            const selectField = document.querySelector(".goog-te-combo");
+            if (!selectField) {
+                console.error("Select field not found");
+                return false;
+            }
+
+            console.log(`Setting language to: ${lang}`);
+            selectField.value = lang;
+
+            // Try multiple event triggering methods
+            const events = [
+                new Event('change', { bubbles: true }),
+                new Event('change', { bubbles: true, cancelable: true }),
+                new Event('input'),
+                new Event('change')
+            ];
+
+            events.forEach(event => {
+                try {
+                    selectField.dispatchEvent(event);
+                } catch (e) {
+                    console.warn("Event dispatch failed:", e);
+                }
+            });
+
+            // Also try to trigger via input event if it's an input
+            const inputEvent = new Event('input', { bubbles: true });
+            selectField.dispatchEvent(inputEvent);
+
+            // Force the select to notify Google Translate
+            if (selectField.fireEvent) {
+                selectField.fireEvent('onchange');
+            }
+
+            // Also try triggering via createEvent for older browsers
+            if (document.createEvent) {
+                const evt = document.createEvent("HTMLEvents");
+                evt.initEvent("change", false, true);
+                selectField.dispatchEvent(evt);
+            }
+
+            // Small delay to let the translation happen
+            setTimeout(() => {
+                console.log("Translation should be complete now");
+            }, 100);
+
+            return true;
         }
 
         document.getElementById("langToggle").addEventListener("click", function () {
             const button = this;
             const selectField = document.querySelector(".goog-te-combo");
+
+            console.log("Button clicked. translateReady:", translateReady, "selectField:", selectField);
 
             if (!translateReady || !selectField) {
                 console.warn("⚠️ Translate not ready yet. Please wait...");
@@ -3574,16 +3628,18 @@
                 return;
             }
 
-            if (button.innerText === "தமிழ்") {
+            if (button.innerText === "தமிழ்" || currentLang === 'en') {
                 console.log("Switching to Tamil...");
-                selectField.value = "ta";
-                selectField.dispatchEvent(new Event("change"));
-                button.innerText = "English";
+                if (triggerTranslation("ta")) {
+                    currentLang = 'ta';
+                    button.innerText = "English";
+                }
             } else {
                 console.log("Switching to English...");
-                selectField.value = "";
-                selectField.dispatchEvent(new Event("change"));
-                button.innerText = "தமிழ்";
+                if (triggerTranslation("")) {
+                    currentLang = 'en';
+                    button.innerText = "தமிழ்";
+                }
             }
         });
     </script>
