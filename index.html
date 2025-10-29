@@ -3547,20 +3547,55 @@
 
         function googleTranslateElementInit() {
             console.log("Initializing Google Translate...");
+            
+            // Temporarily make the element visible so Google Translate can initialize properly
+            const googleElement = document.getElementById('google_translate_element');
+            if (googleElement) {
+                googleElement.style.position = 'fixed';
+                googleElement.style.top = '0px';
+                googleElement.style.left = '0px';
+                googleElement.style.width = '1px';
+                googleElement.style.height = '1px';
+                googleElement.style.opacity = '0';
+                googleElement.style.pointerEvents = 'none';
+            }
+            
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
                 includedLanguages: 'ta',
                 layout: google.translate.TranslateElement.InlineLayout.SIMPLE
             }, 'google_translate_element');
 
-            // Check until dropdown appears
+            // Check until dropdown appears with longer timeout
+            let attempts = 0;
+            const maxAttempts = 50; // 15 seconds total
+            
             const checkInterval = setInterval(() => {
+                attempts++;
                 const selectField = document.querySelector('.goog-te-combo');
+                
+                console.log(`Attempt ${attempts}: Looking for .goog-te-combo, found:`, selectField);
+                
                 if (selectField) {
                     translateReady = true;
                     clearInterval(checkInterval);
                     console.log("✅ Google Translate initialized successfully.");
                     console.log("Select field:", selectField);
+                    console.log("Select field value:", selectField.value);
+                    console.log("Select field options:", selectField.options);
+                    
+                    // Now hide the element again
+                    if (googleElement) {
+                        googleElement.style.position = 'absolute';
+                        googleElement.style.top = '-9999px';
+                        googleElement.style.left = '-9999px';
+                    }
+                } else if (attempts >= maxAttempts) {
+                    clearInterval(checkInterval);
+                    console.error("❌ Google Translate select field not found after 15 seconds");
+                    // Try to find it with a broader selector
+                    const allSelects = document.querySelectorAll('select');
+                    console.log("All select elements found:", allSelects);
                 }
             }, 300);
         }
