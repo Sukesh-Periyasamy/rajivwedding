@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rajiv & Pradeepa Wedding Invitation</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+    <link rel="preload" href="maduraiflip.jpg" as="image">
+    <link rel="preload" href="portrait.jpg" as="image">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -102,6 +104,7 @@
             position: relative;
             z-index: 2;
             animation: fadeInScale 1.2s ease-out;
+            will-change: transform, opacity;
         }
 
         @keyframes fadeInScale {
@@ -131,6 +134,7 @@
             font-size: 30px;
             opacity: 0;
             animation: floatUp 6s ease-in-out infinite;
+            will-change: transform, opacity;
         }
 
         .floating-heart:nth-child(1) {
@@ -198,6 +202,7 @@
             border: 4px solid transparent;
             border-top-color: var(--primary-pink);
             animation: spin 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+            will-change: transform;
         }
 
         .ring:nth-child(2) {
@@ -683,6 +688,7 @@
             display: inline-block;
             animation: heartbeat 1.5s ease-in-out infinite;
             filter: drop-shadow(0 4px 12px rgba(220, 20, 60, 0.5));
+            will-change: transform;
         }
 
         @keyframes heartbeat {
@@ -805,6 +811,7 @@
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            will-change: transform, box-shadow;
         }
 
         .glass-card::before {
@@ -1702,6 +1709,7 @@
             opacity: 0;
             transform: translateY(50px);
             transition: opacity 0.8s ease, transform 0.8s ease;
+            will-change: transform, opacity;
         }
 
         .scroll-reveal.revealed {
@@ -2719,7 +2727,8 @@
                 <a href="https://www.google.com/maps/search/?api=1&query=Sri+Vignesh+Mahal+Pammal+Chennai" 
                    target="_blank" 
                    rel="noopener noreferrer"
-                   class="map-button">
+                   class="map-button"
+                   aria-label="Get directions to Sri Vignesh Mahal wedding venue">
                     <i class="fas fa-directions"></i> Get Directions
                 </a>
             </div>
@@ -2910,7 +2919,8 @@
                 <a href="https://wa.me/?text=Invitation%20to%20Rajiv%20%26%20Pradeepa%20Wedding%20-%20November%2023%2C%202025" 
                    target="_blank" 
                    rel="noopener noreferrer"
-                   class="share-button whatsapp">
+                   class="share-button whatsapp"
+                   aria-label="Share wedding invitation on WhatsApp">
                     <i class="fab fa-whatsapp"></i>
                     <span>Share on WhatsApp</span>
                 </a>
@@ -2918,7 +2928,8 @@
                 <a href="https://www.instagram.com/create/story/" 
                    target="_blank" 
                    rel="noopener noreferrer"
-                   class="share-button instagram">
+                   class="share-button instagram"
+                   aria-label="Share wedding invitation on Instagram">
                     <i class="fab fa-instagram"></i>
                     <span>Share on Instagram</span>
                 </a>
@@ -3554,6 +3565,7 @@
                 transition: all 0.3s ease;
                 font-family: 'Montserrat', sans-serif;
             "
+            aria-label="Toggle Language between English and Tamil"
             onmouseover="this.style.transform='scale(1.05)'"
             onmouseout="this.style.transform='scale(1)'">
         தமிழ்
