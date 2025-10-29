@@ -3622,6 +3622,76 @@
 
     <!-- Hide Toolbar, Keep Dropdown Functional -->
     <style>
+        /* Fix for Tamil/translated text overflow */
+        body {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* Ensure countdown labels don't get cut off */
+        .countdown-label {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.4 !important;
+            max-width: 100%;
+            text-overflow: ellipsis;
+            overflow: visible !important;
+            white-space: normal !important;
+            padding: 5px;
+        }
+        
+        /* Fix for all text elements in countdown */
+        .countdown-card {
+            overflow: visible !important;
+        }
+        
+        /* Ensure all translated text wraps properly */
+        .countdown-section *,
+        .countdown-title,
+        .section-title,
+        .event-title,
+        .timeline-title,
+        .timeline-description,
+        .quote-text,
+        .person-details,
+        .family-names {
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+            white-space: normal !important;
+        }
+        
+        /* Fix for long Tamil words */
+        * {
+            word-break: keep-all;
+        }
+        
+        /* Ensure countdown cards can expand for Tamil text */
+        .countdown-container {
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .countdown-card {
+            min-width: 120px;
+            flex: 1 1 auto;
+        }
+        
+        /* Adjust container spacing for mobile */
+        @media (max-width: 768px) {
+            .countdown-container {
+                gap: 10px;
+            }
+            
+            .countdown-card {
+                min-width: 100px;
+                padding: 20px 15px;
+            }
+            
+            .countdown-label {
+                font-size: clamp(0.5rem, 1.5vw, 0.75rem) !important;
+            }
+        }
+        
         /* Improve language toggle button on mobile */
         @media (max-width: 768px) {
             #langToggle {
