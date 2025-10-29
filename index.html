@@ -1406,10 +1406,15 @@
                 background: 
                     linear-gradient(135deg, rgba(255, 248, 240, 0.7) 0%, rgba(255, 229, 236, 0.7) 100%),
                     url('portrait.jpg') !important;
+                background-attachment: scroll !important;
             }
 
             .hero-section::before {
                 background: rgba(255, 248, 240, 0.2) !important;
+            }
+            
+            body {
+                background-attachment: scroll !important;
             }
 
             .couple-names {
@@ -1990,6 +1995,23 @@
             .zoom-in-effect,
             .rotate-in {
                 transform: translateY(30px);
+            }
+            
+            /* Disable heavy animations on mobile for better performance */
+            .hero-section,
+            .hero-content {
+                animation: none !important;
+            }
+            
+            /* Optimize for smooth scrolling on mobile */
+            .hero-section,
+            .hero-content,
+            .hero-section::before {
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                will-change: auto;
             }
         }
 
