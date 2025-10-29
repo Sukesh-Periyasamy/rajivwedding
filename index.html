@@ -3510,13 +3510,6 @@
 
     </script>
 
-    <!-- Google Translate Container (placed off-screen, not hidden) -->
-    <div id="google_translate_element" style="
-        position: absolute;
-        left: -9999px;
-        top: -9999px;
-    "></div>
-
     <!-- Top-Right Language Toggle Button -->
     <button id="langToggle"
             style="
@@ -3542,158 +3535,58 @@
     </button>
 
     <script>
-        let translateReady = false;
         let currentLang = 'en';
-
-        function googleTranslateElementInit() {
-            console.log("Initializing Google Translate...");
-            
-            // Temporarily make the element visible so Google Translate can initialize properly
-            const googleElement = document.getElementById('google_translate_element');
-            if (googleElement) {
-                googleElement.style.position = 'fixed';
-                googleElement.style.top = '0px';
-                googleElement.style.left = '0px';
-                googleElement.style.width = '1px';
-                googleElement.style.height = '1px';
-                googleElement.style.opacity = '0';
-                googleElement.style.pointerEvents = 'none';
-            }
-            
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'ta',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-
-            // Check until dropdown appears with longer timeout
-            let attempts = 0;
-            const maxAttempts = 50; // 15 seconds total
-            
-            const checkInterval = setInterval(() => {
-                attempts++;
-                const selectField = document.querySelector('.goog-te-combo');
-                
-                console.log(`Attempt ${attempts}: Looking for .goog-te-combo, found:`, selectField);
-                
-                if (selectField) {
-                    translateReady = true;
-                    clearInterval(checkInterval);
-                    console.log("✅ Google Translate initialized successfully.");
-                    console.log("Select field:", selectField);
-                    console.log("Select field value:", selectField.value);
-                    console.log("Select field options:", selectField.options);
-                    
-                    // Now hide the element again
-                    if (googleElement) {
-                        googleElement.style.position = 'absolute';
-                        googleElement.style.top = '-9999px';
-                        googleElement.style.left = '-9999px';
-                    }
-                } else if (attempts >= maxAttempts) {
-                    clearInterval(checkInterval);
-                    console.error("❌ Google Translate select field not found after 15 seconds");
-                    // Try to find it with a broader selector
-                    const allSelects = document.querySelectorAll('select');
-                    console.log("All select elements found:", allSelects);
-                }
-            }, 300);
-        }
-
-        function triggerTranslation(lang) {
-            const selectField = document.querySelector(".goog-te-combo");
-            if (!selectField) {
-                console.error("Select field not found");
-                return false;
-            }
-
-            console.log(`Setting language to: ${lang}`);
-            selectField.value = lang;
-
-            // Try multiple event triggering methods
-            const events = [
-                new Event('change', { bubbles: true }),
-                new Event('change', { bubbles: true, cancelable: true }),
-                new Event('input'),
-                new Event('change')
-            ];
-
-            events.forEach(event => {
-                try {
-                    selectField.dispatchEvent(event);
-                } catch (e) {
-                    console.warn("Event dispatch failed:", e);
-                }
-            });
-
-            // Also try to trigger via input event if it's an input
-            const inputEvent = new Event('input', { bubbles: true });
-            selectField.dispatchEvent(inputEvent);
-
-            // Force the select to notify Google Translate
-            if (selectField.fireEvent) {
-                selectField.fireEvent('onchange');
-            }
-
-            // Also try triggering via createEvent for older browsers
-            if (document.createEvent) {
-                const evt = document.createEvent("HTMLEvents");
-                evt.initEvent("change", false, true);
-                selectField.dispatchEvent(evt);
-            }
-
-            // Small delay to let the translation happen
-            setTimeout(() => {
-                console.log("Translation should be complete now");
-            }, 100);
-
-            return true;
-        }
 
         document.getElementById("langToggle").addEventListener("click", function () {
             const button = this;
-            const selectField = document.querySelector(".goog-te-combo");
-
-            console.log("Button clicked. translateReady:", translateReady, "selectField:", selectField);
-
-            if (!translateReady || !selectField) {
-                console.warn("⚠️ Translate not ready yet. Please wait...");
-                button.innerText = "Loading...";
-                setTimeout(() => (button.innerText = "தமிழ்"), 2000);
-                return;
-            }
-
-            if (button.innerText === "தமிழ்" || currentLang === 'en') {
+            
+            if (currentLang === 'en') {
+                // Switch to Tamil using Google Translate
                 console.log("Switching to Tamil...");
-                if (triggerTranslation("ta")) {
-                    currentLang = 'ta';
-                    button.innerText = "English";
+                button.innerText = "English";
+                currentLang = 'ta';
+                
+                // Create an iframe to load the translated page
+                let translateFrame = document.getElementById('translate-frame');
+                if (!translateFrame) {
+                    translateFrame = document.createElement('iframe');
+                    translateFrame.id = 'translate-frame';
+                    translateFrame.style.display = 'none';
+                    document.body.appendChild(translateFrame);
                 }
+                
+                // Get current page URL
+                const currentUrl = window.location.href;
+                const translateUrl = 'https://translate.google.com/translate?js=n&sl=en&tl=ta&u=' + encodeURIComponent(currentUrl);
+                
+                translateFrame.src = translateUrl;
+                
+                // Redirect the page to translated version
+                window.location.href = translateUrl;
             } else {
+                // Switch back to English
                 console.log("Switching to English...");
-                if (triggerTranslation("")) {
-                    currentLang = 'en';
-                    button.innerText = "தமிழ்";
+                button.innerText = "தமிழ்";
+                currentLang = 'en';
+                
+                // If we're on a translated page, go back to original
+                const currentUrl = window.location.href;
+                if (currentUrl.includes('translate.google.com/translate')) {
+                    // Extract the original URL from the translated URL
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const originalUrl = urlParams.get('u');
+                    if (originalUrl) {
+                        window.location.href = decodeURIComponent(originalUrl);
+                    } else {
+                        window.location.href = window.location.pathname;
+                    }
                 }
             }
         });
     </script>
 
-    <!-- Load Google Translate -->
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
     <!-- Hide Toolbar, Keep Dropdown Functional -->
     <style>
-        .goog-logo-link,
-        .goog-te-gadget span,
-        .goog-te-banner-frame.skiptranslate,
-        .goog-te-gadget-icon {
-            display: none !important;
-        }
-        body {
-            top: 0 !important;
-        }
-        
         /* Improve language toggle button on mobile */
         @media (max-width: 768px) {
             #langToggle {
