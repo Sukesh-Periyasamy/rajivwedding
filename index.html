@@ -3539,6 +3539,16 @@
 
         document.getElementById("langToggle").addEventListener("click", function () {
             const button = this;
+            const currentUrl = window.location.href;
+            
+            // Check if we're on localhost
+            const isLocalhost = currentUrl.includes('localhost') || currentUrl.includes('127.0.0.1') || currentUrl.includes('0.0.0.0');
+            
+            if (isLocalhost) {
+                // For localhost, show a message
+                alert('Translation works when the site is deployed to a public URL.\n\nTo test translation:\n1. Push this to GitHub\n2. Enable GitHub Pages\n3. Access via the public URL');
+                return;
+            }
             
             if (currentLang === 'en') {
                 // Switch to Tamil using Google Translate
@@ -3546,20 +3556,15 @@
                 button.innerText = "English";
                 currentLang = 'ta';
                 
-                // Create an iframe to load the translated page
-                let translateFrame = document.getElementById('translate-frame');
-                if (!translateFrame) {
-                    translateFrame = document.createElement('iframe');
-                    translateFrame.id = 'translate-frame';
-                    translateFrame.style.display = 'none';
-                    document.body.appendChild(translateFrame);
+                // Get the base URL (without any existing translation parameters)
+                let baseUrl = currentUrl;
+                if (currentUrl.includes('translate.goog')) {
+                    // If already on translated page, extract original
+                    const urlParams = new URLSearchParams(window.location.search);
+                    baseUrl = urlParams.get('u') || currentUrl.split('?')[0];
                 }
                 
-                // Get current page URL
-                const currentUrl = window.location.href;
-                const translateUrl = 'https://translate.google.com/translate?js=n&sl=en&tl=ta&u=' + encodeURIComponent(currentUrl);
-                
-                translateFrame.src = translateUrl;
+                const translateUrl = 'https://translate.google.com/translate?js=n&sl=en&tl=ta&u=' + encodeURIComponent(baseUrl);
                 
                 // Redirect the page to translated version
                 window.location.href = translateUrl;
@@ -3570,19 +3575,27 @@
                 currentLang = 'en';
                 
                 // If we're on a translated page, go back to original
-                const currentUrl = window.location.href;
-                if (currentUrl.includes('translate.google.com/translate')) {
+                if (currentUrl.includes('translate.goog') || currentUrl.includes('translate.google.com')) {
                     // Extract the original URL from the translated URL
                     const urlParams = new URLSearchParams(window.location.search);
                     const originalUrl = urlParams.get('u');
                     if (originalUrl) {
                         window.location.href = decodeURIComponent(originalUrl);
                     } else {
-                        window.location.href = window.location.pathname;
+                        window.location.href = '/';
                     }
                 }
             }
         });
+        
+        // Check if we're already on a translated page
+        if (window.location.href.includes('translate.goog') || window.location.href.includes('translate.google.com')) {
+            const button = document.getElementById("langToggle");
+            if (button) {
+                button.innerText = "English";
+                currentLang = 'ta';
+            }
+        }
     </script>
 
     <!-- Hide Toolbar, Keep Dropdown Functional -->
